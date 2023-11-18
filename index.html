@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 예제</title>
+</head>
+<body>
+    <h1>오늘의 급식</h1>
+    <p id="quote"></p>
+
+    <script>
+        // 데이터를 표시할 HTML 요소를 선택합니다.
+        const quoteElement = document.getElementById("quote");
+        const apiKey = '209dfce9e5c34f6bae8462063be6c1ba';
+        const type = 'json';
+        const pindex = 1;
+        const pSize = 10;
+        const ATPT_OFCDC_SC_CODE = 'J10';
+        const SD_SCHUL_CODE = '7531158';
+        const MMEAL_SC_CODE = '2';
+        const MLSV_YMD = '20231020';
+        
+
+        // API URL을 정의합니다.
+        const apiUrl = `https://open.neis.go.kr/hub/mealServiceDietInfo?ATPT_OFCDC_SC_CODE=${ATPT_OFCDC_SC_CODE}&SD_SCHUL_CODE=${SD_SCHUL_CODE}&MMEAL_SC_CODE=${MMEAL_SC_CODE}&Type=${type}&pindex=${pindex}&pSize=${pSize}&KEY=${apiKey}&MLSV_YMD=${MLSV_YMD}`;
+
+        // API에서 데이터를 가져옵니다.
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // 받아온 데이터를 처리하고 표시합니다.
+                const meals = data.mealServiceDietInfo[1].row[0].DDISH_NM.split('<br/>');
+                quoteElement.innerHTML = meals.join('<br>');
+            })
+            .catch(error => {
+                console.error("오류 발생:", error);
+                quoteElement.textContent = "데이터를 가져오는 데 실패했습니다.";
+            });
+    </script>
+    
+    <style>
+        
+    </style>
+</body>
+</html>
