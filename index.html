@@ -101,7 +101,13 @@
         const ATPT_OFCDC_SC_CODE = 'J10';
         const SD_SCHUL_CODE = '7531158';
         const MMEAL_SC_CODE = '2';
-        const MLSV_YMD = '20231120';
+        
+        // 현재 날짜를 생성합니다.
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = (today.getMonth() + 1).toString().padStart(2, '0');
+        const day = today.getDate().toString().padStart(2, '0');
+        const MLSV_YMD = `${year}${month}${day}`;
 
         // API URL을 정의합니다.
         const apiUrl = `https://open.neis.go.kr/hub/mealServiceDietInfo?ATPT_OFCDC_SC_CODE=${ATPT_OFCDC_SC_CODE}&SD_SCHUL_CODE=${SD_SCHUL_CODE}&MMEAL_SC_CODE=${MMEAL_SC_CODE}&Type=${type}&pindex=${pindex}&pSize=${pSize}&KEY=${apiKey}&MLSV_YMD=${MLSV_YMD}`;
@@ -128,5 +134,4 @@
     </script>
     
 </body>
-
 </html>
